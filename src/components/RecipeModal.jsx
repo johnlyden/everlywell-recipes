@@ -14,8 +14,40 @@ export default class RecipeModal extends Component {
     Modal.setAppElement('body');
   }
 
-  
+  formatIngredients() {
+    const recipe = this.props.selectedRecipe;
+    // pluck ingredient name key/values from recipe Object.  ex [["strIngredient1", "Chicken"]]
+    const ingredientNames = Object.entries(recipe).filter( ([key, value]) => {
+      return key.startsWith('strIngredient');
+    });
+    // pluck ingredient amount key/values from recipe Object. ex [["strMeasure1", "1 whole"]]
+    const ingredientAmounts = Object.entries(recipe).filter( ([key, value]) => {
+      return key.startsWith('strMeasure');
+    });
+    // zip up arrays to create array with ingredient name and amount ex [["1 whole", "Chicken"]]
+    const formattedIngredients = ingredientAmounts.map( (e, i) => {
+      return [e[1], ingredientNames[i][1]]
+    }).filter( key => key.indexOf("") < 0 ); // remove empty values
 
+    return formattedIngredients;
+  }
+
+  renderIngredients(ingredientArray) {
+    const ingredients = ingredientArray.map( (ingredient) => {
+      return <li key={ingredient[1]}>{`${ingredient[0]} ${ingredient[1]}`}</li>
+    })
+    return (
+      <ul className="ingredients-list">{ingredients}</ul>
+    );
+  }
+
+  renderDirections() {
+    return (
+      <p>{this.props.selectedRecipe.strInstructions}</p>
+    )
+  }
+
+  
   render() {
     if (!this.props.modalIsOpen) {
       return <div></div>;
