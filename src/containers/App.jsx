@@ -5,6 +5,8 @@ import * as Actions from '../actions';
 import '../App.css';
 import Header from '../components/Header';
 import RecipeList from '../components/RecipeList';
+import RecipeModal from '../components/RecipeModal';
+
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +25,11 @@ class App extends Component {
         <RecipeList
           recipes={ this.props.recipes } 
           onRecipeSelect={ selectedRecipe => this.props.actions.openModal({selectedRecipe}) }/>
+        <RecipeModal 
+          modalIsOpen={this.props.modalIsOpen}
+          selectedRecipe={this.props.selectedRecipe}
+          onRequestClose={this.props.actions.closeModal}
+        />
       </div>
     );
   }
