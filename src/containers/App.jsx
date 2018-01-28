@@ -8,16 +8,14 @@ import RecipeList from '../components/RecipeList';
 import SearchBar from '../components/SearchBar';
 import RecipeModal from '../components/RecipeModal';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    this.props.actions.requestRecipes();
+    // this.props.actions.requestRecipes();
   }
-
 
   render() {
     return (
@@ -33,17 +31,21 @@ class App extends Component {
           modalIsOpen={this.props.modalIsOpen}
           selectedRecipe={this.props.selectedRecipe}
           onRequestClose={this.props.actions.closeModal}
+          addToFavorites={this.props.actions.addToFavorites}
+          removeFromFavorites={this.props.actions.removeFromFavorites}
+          favoriteRecipes={this.props.favorites}
         />
       </div>
     );
   }
-
-}
+};
 
 function mapStateToProps(state) {
   return {
     modalIsOpen: state.modal.modalIsOpen,
-    recipes: state.recipes
+    recipes: state.recipes,
+    selectedRecipe: state.modal.selectedRecipe,
+    favorites: state.favorites
   };
 }
 
