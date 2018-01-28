@@ -6,6 +6,7 @@ export const REQUEST_RECIPES = 'REQUEST_RECIPES';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 export const LOAD_FAVORITES = 'LOAD_FAVORITES';
+export const SHOW_FAVORITES = 'SHOW_FAVORITES';
 
 // this API does not have CORS enabled
 // proxyURL is open CORS proxy that just adds the Access-Control-Allow-Origin response header so that browsers will allow your frontend JavaScript code to access the response.
@@ -69,3 +70,11 @@ export function addFavoritesFromStorage(recipes) {
     payload: recipes
   }
 }
+
+export function showFavorites(recipes) {
+  return {
+    type: SHOW_FAVORITES,
+    payload: recipes
+  }
+}
+

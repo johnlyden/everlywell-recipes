@@ -2,7 +2,7 @@ import { ADD_FAVORITE, REMOVE_FAVORITE, LOAD_FAVORITES } from '../actions';
 
 const initialState = [];
 
-export default function recipe(state = initialState, action){
+export default function favorite(state = initialState, action){
 	switch(action.type) {
     case ADD_FAVORITE:
       return [

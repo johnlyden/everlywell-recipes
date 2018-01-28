@@ -14,6 +14,7 @@ class App extends Component {
     super(props);
 
     this.updateLocalStorage = this.updateLocalStorage.bind(this);
+    this.showFavoriteRecipes = this.showFavoriteRecipes.bind(this);
   }
 
   componentDidMount() {
@@ -43,12 +44,17 @@ class App extends Component {
     this.props.actions.addFavoritesFromStorage(favorites);
   }
 
+  showFavoriteRecipes() {
+    this.props.actions.showFavorites(this.props.favorites);
+  }
+
   // when favorites does update - call something to update local storage
 
   render() {
     return (
       <div className="app-container">
-        <Header favorites={this.props.favorites}/>
+        <Header favorites={this.props.favorites} 
+          loadFavoriteRecipes= { this.showFavoriteRecipes }/>
         <RecipeList
           recipes={ this.props.recipes } 
           onRecipeSelect={ selectedRecipe => this.props.actions.openModal({selectedRecipe}) }/>
