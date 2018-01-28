@@ -33,8 +33,8 @@ export default class RecipeModal extends Component {
   }
 
   renderIngredients(ingredientArray) {
-    const ingredients = ingredientArray.map( (ingredient) => {
-      return <li key={ingredient[1]}>{`${ingredient[0]} ${ingredient[1]}`}</li>
+    const ingredients = ingredientArray.map( (ingredient, i) => {
+      return <li key={`ingredient${i}`}>{`${ingredient[0]} ${ingredient[1]}`}</li>
     })
     return (
       <ul className="ingredients-list">{ingredients}</ul>

@@ -20,7 +20,7 @@ class App extends Component {
   render() {
     return (
       <div className="app-container">
-        <Header />
+        <Header favorites={this.props.favorites}/>
         <RecipeList
           recipes={ this.props.recipes } 
           onRecipeSelect={ selectedRecipe => this.props.actions.openModal({selectedRecipe}) }/>
