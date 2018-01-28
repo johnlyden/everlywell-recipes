@@ -12,11 +12,38 @@ import RecipeModal from '../components/RecipeModal';
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.updateLocalStorage = this.updateLocalStorage.bind(this);
   }
 
   componentDidMount() {
+    // check local storage
+    if (localStorage.getItem('everlywellRecipes') !== null) {
+      const favorites = JSON.parse(localStorage.getItem('everlywellRecipes'));
+      // array of objects
+      this.loadFavoritesFromLocalStorage(favorites);
+    }
+    // if something is in there
+    // dispatch an action to add favs to app state
     this.props.actions.requestRecipes();
   }
+
+  updateLocalStorage(recipe) {
+    const hasCurrentFavs = JSON.parse(localStorage.getItem('everlywellRecipes'));
+    const currentFavorites = hasCurrentFavs ? hasCurrentFavs : [];
+    const updatedFavorites = currentFavorites.concat(recipe);
+    localStorage.setItem('everlywellRecipes', JSON.stringify(updatedFavorites));
+  }
+
+  /**
+   * 
+   * @param { Array } favorites array of recipe objects
+   */
+  loadFavoritesFromLocalStorage(favorites) {
+    this.props.actions.addFavoritesFromStorage(favorites);
+  }
+
+  // when favorites does update - call something to update local storage
 
   render() {
     return (
@@ -35,6 +62,7 @@ class App extends Component {
           addToFavorites={this.props.actions.addToFavorites}
           removeFromFavorites={this.props.actions.removeFromFavorites}
           favoriteRecipes={this.props.favorites}
+          updateLocalStorage={this.updateLocalStorage}
         />
       </div>
     );

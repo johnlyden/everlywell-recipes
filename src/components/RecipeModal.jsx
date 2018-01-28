@@ -79,8 +79,15 @@ export default class RecipeModal extends Component {
     if (e.target.classList.contains('is-favorite')) {
       this.props.removeFromFavorites(this.props.selectedRecipe);
     } else {
-      this.props.addToFavorites(this.props.selectedRecipe);
+      this.addFavorite(this.props.selectedRecipe);
     }
+  }
+
+  addFavorite(recipe) {
+    // call action creator to update application state
+    this.props.addToFavorites(recipe);
+    // call something to add to localStorage
+    this.props.updateLocalStorage(recipe);
   }
 
   /**

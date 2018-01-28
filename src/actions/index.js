@@ -63,7 +63,7 @@ export function removeFromFavorites(recipe) {
   }
 }
 
-export function loadFavoriteRecipes(recipes) {
+export function addFavoritesFromStorage(recipes) {
   return {
     type: LOAD_FAVORITES,
     payload: recipes
