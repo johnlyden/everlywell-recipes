@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import ModalReducer from './modal';
-import RecipesReducer from './recipes';
+import ModalReducer from './modal_reducer';
+import RecipesReducer from './recipes_reducer';
 import FavoritesReducer from './favorites_reducer';
 
 const rootReducer = combineReducers({

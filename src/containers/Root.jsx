@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import configureStore from '../configureStore';
 import { addFavoritesFromStorage } from '../actions';
@@ -12,9 +12,6 @@ export default class Root extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    
-  }
   render() {
     return (
       <Provider store={store}>
@@ -23,11 +20,3 @@ export default class Root extends Component {
     )
   }
 }
-
-function mapDispatchToProps(dispatch){
-  return {
-    // addFavoritesFromStorage
-  };
-}
-
-// export default connect(null, mapDispatchToProps)(Root);

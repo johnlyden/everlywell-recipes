@@ -28,6 +28,10 @@ export function closeModal() {
   }
 }
 
+/**
+ * Forms URL, makes request and passes promise to reducer
+ * @param { String } term 
+ */
 export function requestRecipes(term = null) {
   let url;
   if (term !== null && term !== "" && term !== 'undefined') {

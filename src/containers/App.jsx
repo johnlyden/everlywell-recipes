@@ -19,38 +19,17 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // check local storage
+    // check if favorites stored in localStorage
     if (localStorage.getItem('everlywellRecipes') !== null) {
       const favorites = JSON.parse(localStorage.getItem('everlywellRecipes'));
-      // array of objects
+      // load these favorites
       this.loadFavoritesFromLocalStorage(favorites);
     }
-    // if something is in there
-    // dispatch an action to add favs to app state
+    // request random recipes
     this.props.actions.requestRecipes();
   }
 
-  updateLocalStorage(recipe) {
-    const hasCurrentFavs = JSON.parse(localStorage.getItem('everlywellRecipes'));
-    const currentFavorites = hasCurrentFavs ? hasCurrentFavs : [];
-    const updatedFavorites = currentFavorites.concat(recipe);
-    localStorage.setItem('everlywellRecipes', JSON.stringify(updatedFavorites));
-  }
-
-  removeRecipeFromFavorites(recipe) {
-    this.props.actions.removeFromFavorites(recipe);
-    this.removeFromLocalStorage(recipe);
-  }
-
-  removeFromLocalStorage(recipe) {
-    const currentFavs = JSON.parse(localStorage.getItem('everlywellRecipes'));
-    const updatedFavs = currentFavs.filter( (el) => {
-      return el.idMeal !== recipe.idMeal;
-    });
-    localStorage.setItem('everlywellRecipes', JSON.stringify(updatedFavs));
-  }
-
-  /**
+   /**
    * 
    * @param { Array } favorites array of recipe objects
    */
@@ -58,11 +37,44 @@ class App extends Component {
     this.props.actions.addFavoritesFromStorage(favorites);
   }
 
+  /**
+   * Calls action creator to showh favorites in RecipeList
+   */
   showFavoriteRecipes() {
     this.props.actions.showFavorites(this.props.favorites);
   }
 
-  // when favorites does update - call something to update local storage
+  /**
+   * Adds new favorite recipe to favorites stored in LocalStorage
+   * @param { Object } recipe 
+   */
+  updateLocalStorage(recipe) {
+    const hasCurrentFavs = JSON.parse(localStorage.getItem('everlywellRecipes'));
+    const currentFavorites = hasCurrentFavs ? hasCurrentFavs : [];
+    const updatedFavorites = currentFavorites.concat(recipe);
+    localStorage.setItem('everlywellRecipes', JSON.stringify(updatedFavorites));
+  }
+
+  /**
+   * Calls to method and action creator to remove recipe from localStorage and application state
+   * @param { Object } recipe 
+   */
+  removeRecipeFromFavorites(recipe) {
+    this.props.actions.removeFromFavorites(recipe);
+    this.removeFromLocalStorage(recipe);
+  }
+
+  /**
+   * Removes specified recipe from localStorage object
+   * @param { Object } recipe 
+   */
+  removeFromLocalStorage(recipe) {
+    const currentFavs = JSON.parse(localStorage.getItem('everlywellRecipes'));
+    const updatedFavs = currentFavs.filter( (el) => {
+      return el.idMeal !== recipe.idMeal;
+    });
+    localStorage.setItem('everlywellRecipes', JSON.stringify(updatedFavs));
+  }
 
   render() {
     return (

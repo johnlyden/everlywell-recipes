@@ -7,12 +7,6 @@ import logo from '../logo.png';
 export default class Header extends Component {
   constructor(props) {
     super(props);
-
-    this.onFavoritesClick = this.onFavoritesClick.bind(this);
-  }
-
-  onFavoritesClick() {
-    this.props.loadFavoriteRecipes();
   }
 
   /**
@@ -21,7 +15,7 @@ export default class Header extends Component {
   maybeRenderFavorites() {
     if (!this.props.favorites.length) { return null };
     return (
-      <div className="favorites-alert" onClick={this.onFavoritesClick}>
+      <div className="favorites-alert" onClick={this.props.loadFavoriteRecipes}>
         <i className={`fa fa-3x fa-heart is-favorite`} aria-hidden="true"></i>
         <span className="view-fav">View your favorites</span>
       </div>
