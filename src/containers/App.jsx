@@ -4,11 +4,17 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 import '../App.css';
 import Header from '../components/Header';
+import RecipeList from '../components/RecipeList';
 
 class App extends Component {
   constructor(props) {
     super(props);
   }
+
+  componentDidMount() {
+    this.props.actions.requestRecipes();
+  }
+
 
   render() {
     return (
