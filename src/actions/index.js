@@ -49,3 +49,17 @@ export function requestRecipes(term = null) {
       payload: request
   }
 }
+
+export function addToFavorites(recipe) {
+  return {
+    type: ADD_FAVORITE,
+    payload: recipe
+  }
+}
+
+export function removeFromFavorites(recipe) {
+  return {
+    type: REMOVE_FAVORITE,
+    payload: recipe
+  }
+}
