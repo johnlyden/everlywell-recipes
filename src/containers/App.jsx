@@ -15,6 +15,7 @@ class App extends Component {
 
     this.updateLocalStorage = this.updateLocalStorage.bind(this);
     this.showFavoriteRecipes = this.showFavoriteRecipes.bind(this);
+    this.removeRecipeFromFavorites = this.removeRecipeFromFavorites.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +35,19 @@ class App extends Component {
     const currentFavorites = hasCurrentFavs ? hasCurrentFavs : [];
     const updatedFavorites = currentFavorites.concat(recipe);
     localStorage.setItem('everlywellRecipes', JSON.stringify(updatedFavorites));
+  }
+
+  removeRecipeFromFavorites(recipe) {
+    this.props.actions.removeFromFavorites(recipe);
+    this.removeFromLocalStorage(recipe);
+  }
+
+  removeFromLocalStorage(recipe) {
+    const currentFavs = JSON.parse(localStorage.getItem('everlywellRecipes'));
+    const updatedFavs = currentFavs.filter( (el) => {
+      return el.idMeal !== recipe.idMeal;
+    });
+    localStorage.setItem('everlywellRecipes', JSON.stringify(updatedFavs));
   }
 
   /**
@@ -66,7 +80,7 @@ class App extends Component {
           selectedRecipe={this.props.selectedRecipe}
           onRequestClose={this.props.actions.closeModal}
           addToFavorites={this.props.actions.addToFavorites}
-          removeFromFavorites={this.props.actions.removeFromFavorites}
+          removeFromFavorites={this.removeRecipeFromFavorites}
           favoriteRecipes={this.props.favorites}
           updateLocalStorage={this.updateLocalStorage}
         />

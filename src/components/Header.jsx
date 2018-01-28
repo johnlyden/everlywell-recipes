@@ -12,7 +12,6 @@ export default class Header extends Component {
   }
 
   onFavoritesClick() {
-    // TODO: call action creator to load favorite recipes in RecipeList
     this.props.loadFavoriteRecipes();
   }
 
