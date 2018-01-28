@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 import '../App.css';
+import Header from '../components/Header';
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +12,9 @@ class App extends Component {
 
   render() {
     return (
-      <h2>app</h2>
+      <div className="app-container">
+        <Header />
+      </div>
     );
   }
 
