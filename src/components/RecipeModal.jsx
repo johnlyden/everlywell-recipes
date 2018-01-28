@@ -47,7 +47,27 @@ export default class RecipeModal extends Component {
     )
   }
 
-  
+  /**
+   * Toggles adding/removing recipe from array of favorites
+   * @param { Object } e event 
+   */
+  toggleFavorite(e) {
+    if (e.target.classList.contains('is-favorite')) {
+      this.props.removeFromFavorites(this.props.selectedRecipe);
+    } else {
+      this.props.addToFavorites(this.props.selectedRecipe);
+    }
+  }
+
+  checkFavorites() {
+    const recipeID = this.props.selectedRecipe.idMeal;
+    const favorites = this.props.favoriteRecipes;
+
+    return favorites.some( (recipe) => {
+      return recipe.idMeal === recipeID
+    });
+  }
+
   render() {
     if (!this.props.modalIsOpen) {
       return <div></div>;

@@ -7,7 +7,7 @@ export default class RecipeList extends Component {
   }
 
   renderRecipes() {
-    if (!this.props.recipes.length) { return <h2>Sorry we didn't find any matches</h2> };
+    if (!this.props.recipes.length) { return <h2>Loading...</h2> };
     return this.props.recipes.map( (recipe, index) => {
       return <Recipe key={index}
                      recipe={recipe} 

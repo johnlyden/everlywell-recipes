@@ -1,3 +1,22 @@
+.header-container {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-container {
+  text-align: center;
+  width: 25vw;
+}
+
+.logo {
+  width: 100%;
+  margin-top: 50%;
+  margin-bottom: 50%;
+}
+
 .recipe-container h2 {
   text-align: center;
 }

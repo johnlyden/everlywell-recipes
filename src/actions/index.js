@@ -21,7 +21,6 @@ export function openModal(selectedRecipe) {
 }
 
 export function closeModal() {
-  debugger;
   return {
     type: CLOSE_MODAL
   }

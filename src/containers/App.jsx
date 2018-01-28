@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.props.actions.requestRecipes();
+    this.props.actions.requestRecipes();
   }
 
   render() {
