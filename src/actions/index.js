@@ -1,4 +1,4 @@
-export const REQUEST_RECIPES = 'REQUEST_RECIPES';
+import axios from 'axios';
 
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
