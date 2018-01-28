@@ -5,6 +5,7 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const REQUEST_RECIPES = 'REQUEST_RECIPES';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
+export const LOAD_FAVORITES = 'LOAD_FAVORITES';
 
 // this API does not have CORS enabled
 // proxyURL is open CORS proxy that just adds the Access-Control-Allow-Origin response header so that browsers will allow your frontend JavaScript code to access the response.
@@ -25,7 +26,6 @@ export function closeModal() {
     type: CLOSE_MODAL
   }
 }
-
 
 export function requestRecipes(term = null) {
   let url;
@@ -60,5 +60,12 @@ export function removeFromFavorites(recipe) {
   return {
     type: REMOVE_FAVORITE,
     payload: recipe
+  }
+}
+
+export function loadFavoriteRecipes(recipes) {
+  return {
+    type: LOAD_FAVORITES,
+    payload: recipes
   }
 }
