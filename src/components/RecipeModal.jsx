@@ -5,15 +5,32 @@ export default class RecipeModal extends Component {
   constructor(props) {
     super(props);
 
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+    this.toggleFavorite = this.toggleFavorite.bind(this);
+
     this.state = {
       isFavorite: false
     }
   }
 
   componentWillMount() {
+    // specify what should be hidden when Modal renders
     Modal.setAppElement('body');
   }
 
+  /**
+   * Returns a nested array with ingredients and measurements, ex [["1 whole", "chicken"], ["2 chopped", "tomatos"]]
+   * Each meal that is returned from API is strucutred such that ingredients and the amount of each ingredient are separate properties
+   * 
+   * exampleResponse = {
+   *  "strMeal": "Chicken Dinner Meal"
+   *  "strIngredient1": "chicken",
+   *  "strIngredient2": "Tomatos",
+   *  "strMeasure1": "1 whole",
+   *  "strMeasure2": "2 diced"
+   *  }
+   * 
+   */
   formatIngredients() {
     const recipe = this.props.selectedRecipe;
     // pluck ingredient name key/values from recipe Object.  ex [["strIngredient1", "Chicken"]]
@@ -32,6 +49,10 @@ export default class RecipeModal extends Component {
     return formattedIngredients;
   }
 
+  /**
+   * Returns <ul> with formatted measurements and ingredients
+   * @param { Array } ingredientArray result of formatIngredients
+   */
   renderIngredients(ingredientArray) {
     const ingredients = ingredientArray.map( (ingredient, i) => {
       return <li key={`ingredient${i}`}>{`${ingredient[0]} ${ingredient[1]}`}</li>
@@ -41,6 +62,9 @@ export default class RecipeModal extends Component {
     );
   }
 
+  /**
+   * Returns instructions for recipe
+   */
   renderDirections() {
     return (
       <p>{this.props.selectedRecipe.strInstructions}</p>
@@ -59,6 +83,9 @@ export default class RecipeModal extends Component {
     }
   }
 
+  /**
+   * Returns boolean to see if the recipe is already marked as a favorite
+   */
   checkFavorites() {
     const recipeID = this.props.selectedRecipe.idMeal;
     const favorites = this.props.favoriteRecipes;
@@ -66,6 +93,13 @@ export default class RecipeModal extends Component {
     return favorites.some( (recipe) => {
       return recipe.idMeal === recipeID
     });
+  }
+
+  /**
+   * Calls requestClose action creator
+   */
+  handleCloseClick() {
+    this.props.onRequestClose();
   }
 
   render() {
@@ -81,10 +115,10 @@ export default class RecipeModal extends Component {
             isOpen={ this.props.modalIsOpen }>
           <div className="recipe-modal">
             <div className="modal-nav">
-              <button onClick={ () => this.props.onRequestClose() }>
+              <button onClick={ this.handleCloseClick }>
                 <i className="fa fa-3x fa-arrow-circle-left" aria-hidden="true"></i>
               </button>
-              <button className="like-container" onClick={ (e) => this.toggleFavorite(e) }>
+              <button className="like-container" onClick={ this.toggleFavorite }>
                 <i className={`fa fa-3x fa-heart ${favClass}`} aria-hidden="true"></i>
               </button>
             </div>

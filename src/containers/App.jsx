@@ -8,6 +8,7 @@ import RecipeList from '../components/RecipeList';
 import SearchBar from '../components/SearchBar';
 import RecipeModal from '../components/RecipeModal';
 
+/** class representing App component */
 class App extends Component {
   constructor(props) {
     super(props);
@@ -49,10 +50,6 @@ function mapStateToProps(state) {
   };
 }
 
-/**
- * Bind all actions to props
- * @param { Function } dispatch 
- */
 function mapDispatchToProps(dispatch){
   return {
     actions: bindActionCreators(Actions, dispatch)

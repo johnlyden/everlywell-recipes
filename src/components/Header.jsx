@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import background from '../home-background.jpg';
 import logo from '../logo.png';
 
+/** class representing a Header Component */
 export default class Header extends Component {
   constructor(props) {
     super(props);
@@ -11,11 +12,12 @@ export default class Header extends Component {
   }
 
   onFavoritesClick() {
-    // call fetch recipes
-    // pass array of favorits
+    // TODO: call action creator to load favorite recipes in RecipeList 
   }
 
-
+  /**
+   * If there are favorites, render an indicator in the header and a mechanism to load them
+   */
   maybeRenderFavorites() {
     if (!this.props.favorites.length) { return null };
     return (
@@ -25,6 +27,7 @@ export default class Header extends Component {
       </div>
     );
   }
+
   render() {
     const style = {
       backgroundImage: `url(${background})`

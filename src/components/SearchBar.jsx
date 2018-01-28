@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 
+/** class representing SearchBar component */
 export default class SearchBar extends Component {
   constructor(props) {
     super(props);
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.toggleSearch = this.toggleSearch.bind(this);
     this.state = { term: '', isOpen: false };
   }
 
@@ -14,17 +16,29 @@ export default class SearchBar extends Component {
     Modal.setAppElement('body');
   }
 
-  onInputChange(event) {
-    this.setState({term: event.target.value})
+  /**
+   * Sets component state for term - controlled Input
+   * @param { Object } e change event
+   */
+  onInputChange(e) {
+    this.setState({term: e.target.value})
   }
 
+  /**
+   * Toggles state showing/hiding searchBar (in modal)
+   */
   toggleSearch() {
     const currentState = this.state.isOpen;
     this.setState({ isOpen: !currentState });
   }
 
-  onFormSubmit(event) {
-    event.preventDefault();
+  /**
+   * calls requestRecipe action creator and passes search term
+   * resets the searchBar state
+   * @param { Object } e submit event
+   */
+  onFormSubmit(e) {
+    e.preventDefault();
     this.props.requestRecipes(this.state.term);
     this.setState({ term: '' });
     this.toggleSearch();
@@ -33,12 +47,12 @@ export default class SearchBar extends Component {
   render() {
     return (
       <div className="search-container">
-        <div className="search-trigger" onClick={() => { this.toggleSearch() }}>
+        <div className="search-trigger" onClick={ this.toggleSearch }>
           <i className="fa fa-2x fa-search" aria-hidden="true"></i>
         </div>
         <Modal isOpen={ this.state.isOpen } className="search-modal">
           <div className="search-nav">
-            <button onClick={ () => this.toggleSearch() }>
+            <button onClick={ this.toggleSearch }>
               <i className="fa fa-3x fa-arrow-circle-left" aria-hidden="true"></i>
             </button>
             <form onSubmit={this.onFormSubmit} >
