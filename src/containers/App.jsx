@@ -20,6 +20,9 @@ class App extends Component {
     return (
       <div className="app-container">
         <Header />
+        <RecipeList
+          recipes={ this.props.recipes } 
+          onRecipeSelect={ selectedRecipe => this.props.actions.openModal({selectedRecipe}) }/>
       </div>
     );
   }
@@ -27,7 +30,10 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    modalIsOpen: state.modal.modalIsOpen,
+    recipes: state.recipes
+  };
 }
 
 /**

@@ -1,11 +1,32 @@
 export const REQUEST_RECIPES = 'REQUEST_RECIPES';
 
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
+export const REQUEST_RECIPES = 'REQUEST_RECIPES';
+export const ADD_FAVORITE = 'ADD_FAVORITE';
+export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 
 // this API does not have CORS enabled
 // proxyURL is open CORS proxy that just adds the Access-Control-Allow-Origin response header so that browsers will allow your frontend JavaScript code to access the response.
 const proxyURL = "https://cors-anywhere.herokuapp.com/";
 const ROOT_SEARCH_URL = 'http://www.themealdb.com/api/json/v1/1/search.php?s=';
 const ROOT_LATEST_URL = 'http://www.themealdb.com/api/json/v1/1/latest.php';
+
+
+export function openModal(selectedRecipe) {
+  return {
+    type: OPEN_MODAL,
+    payload: selectedRecipe
+  }
+}
+
+export function closeModal() {
+  debugger;
+  return {
+    type: CLOSE_MODAL
+  }
+}
+
 
 export function requestRecipes(term = null) {
   let url;
