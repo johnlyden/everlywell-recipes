@@ -5,6 +5,7 @@ import * as Actions from '../actions';
 import '../App.css';
 import Header from '../components/Header';
 import RecipeList from '../components/RecipeList';
+import SearchBar from '../components/SearchBar';
 import RecipeModal from '../components/RecipeModal';
 
 
@@ -25,6 +26,9 @@ class App extends Component {
         <RecipeList
           recipes={ this.props.recipes } 
           onRecipeSelect={ selectedRecipe => this.props.actions.openModal({selectedRecipe}) }/>
+        <SearchBar 
+          requestRecipes={this.props.actions.requestRecipes}
+        />
         <RecipeModal 
           modalIsOpen={this.props.modalIsOpen}
           selectedRecipe={this.props.selectedRecipe}
