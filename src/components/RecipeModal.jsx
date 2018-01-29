@@ -7,10 +7,6 @@ export default class RecipeModal extends Component {
 
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.toggleFavorite = this.toggleFavorite.bind(this);
-
-    this.state = {
-      isFavorite: false
-    }
   }
 
   componentWillMount() {
@@ -83,6 +79,10 @@ export default class RecipeModal extends Component {
     }
   }
 
+  /**
+   * add recipe to favorites - app state and localStorage
+   * @param { Object } recipe 
+   */
   addFavorite(recipe) {
     // call action creator to update application state
     this.props.addToFavorites(recipe);
